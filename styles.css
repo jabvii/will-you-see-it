@@ -1,0 +1,130 @@
+  :root{
+    --bg: #2b2b2b; /* dark gray */
+    --canvas-border: #e6e6e6;
+  }
+
+  *{box-sizing:border-box}
+  html,body{
+    height:100%;
+    margin:0;
+    font-family:Inter, Arial, Helvetica, sans-serif;
+    background:var(--bg);
+  }
+
+  .wrap{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    position:relative;
+  }
+
+  /* Center the canvas and video exactly the same size */
+  canvas, video{
+    display:block;
+    width:1200px;
+    height:600px;
+    background:#1f1f1f;
+    border:4px solid var(--canvas-border);
+    box-shadow:0 10px 30px rgba(0,0,0,0.6);
+    image-rendering: pixelated;
+  }
+
+  /* ensure video overlays exactly where the canvas is */
+  #deathVideo{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    display:none;
+    z-index: 1000;
+  }
+
+  /* Fake command window overlay */
+  .hidden { display: none !important; }
+
+  .fake-cmd {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 780px;
+    max-width: calc(100% - 40px);
+    background: #0a0a0a;
+    border: 2px solid #1f1f1f;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    color: #b8ffb8;
+    z-index: 2000;
+    font-family: "Courier New", monospace;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  /* header */
+  .cmd-header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 12px;
+    background: linear-gradient(#111,#0b0b0b);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+  }
+  .cmd-title { font-size:13px; color:#9ef39e; }
+  .cmd-close {
+    background:transparent;
+    border:none;
+    color: #aaa;
+    font-weight:700;
+    cursor:pointer;
+    font-size:16px;
+    padding:2px 6px;
+    border-radius:4px;
+  }
+  .cmd-close:hover { color:#fff; background: rgba(255,255,255,0.03); }
+
+  /* body */
+  .cmd-body { padding:12px; min-height:160px; }
+  .cmd-text {
+    color: #9ef39e;
+    font-size:14px;
+    line-height:1.35;
+    margin:0 0 10px 0;
+    white-space:pre-wrap;
+    min-height:70px;
+    max-height:180px;
+    overflow:auto;
+  }
+
+  /* progress */
+  .progress-wrap {
+    width:100%;
+    height:12px;
+    background: rgba(255,255,255,0.05);
+    border-radius:6px;
+    overflow:hidden;
+    margin-bottom:10px;
+  }
+  .cmd-progress {
+    height:100%;
+    width:0%;
+    background: linear-gradient(90deg,#26d326,#7cff7c);
+    transition: width 120ms linear;
+  }
+
+  /* final message */
+  .final-msg {
+    color:#fff;
+    font-weight:700;
+    margin-top:6px;
+    text-align:center;
+  }
+
+  /* ensure keyboard focus outlines are visible for accessibility */
+  .cmd-close:focus { outline: 2px solid rgba(255,255,255,0.12); }
+
+  /* small responsive tweak for narrow screens */
+  @media (max-width:840px){
+    .fake-cmd { width: calc(100% - 40px); }
+    canvas, video { width: calc(100% - 40px); height: calc((100% - 40px) * 0.5); }
+  }
